@@ -2,40 +2,37 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /**
- * Monolithic reference implementation.
- *
- * This is the control group for the technical evaluation, not part of the
- * proposed solution. It implements the same screens, with the same design
- * tokens, as the micro-frontend version - but as a single application with
- * a single build and a single bundle. Any measured difference between the
- * two should therefore be attributable to the architecture rather than to
- * differences in scope or visual complexity.
- *
- * Deliberately no ModuleFederationPlugin here.
+ * Monolithic reference implementation - the control group for the technical
+ * evaluation. Same screens, same tokens, single build, single bundle.
+ * Deliberately no ModuleFederationPlugin.
  */
-module.exports = {
-  entry: './src/index.js',
-  mode: 'development',
-  devServer: {
-    port: 3001,
-    historyApiFallback: true,
-  },
-  output: {
-    publicPath: 'auto',
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
-    clean: true,
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  module: {
-    rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
-      { test: /\.s?css$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+module.exports = (env, argv) => {
+  const isProd = argv.mode === 'production';
+
+  return {
+    entry: './src/index.js',
+    mode: isProd ? 'production' : 'development',
+    devServer: {
+      port: 3001,
+      historyApiFallback: true,
+    },
+    output: {
+      publicPath: isProd ? '/amor-lineribus-mono/' : 'auto',
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].[contenthash].js',
+      clean: true,
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
+    module: {
+      rules: [
+        { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
+        { test: /\.s?css$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      ],
+    },
+    plugins: [
+      new HtmlWebpackPlugin({ template: './public/index.html' }),
     ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({ template: './public/index.html' }),
-  ],
+  };
 };
