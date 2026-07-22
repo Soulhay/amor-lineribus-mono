@@ -1,0 +1,141 @@
+/* =========================================================================
+   Amor Lineribus - design tokens
+   =========================================================================
+
+   This file is the shared visual contract between the React shell and the
+   Angular and Vue remotes. Because the remotes are built and deployed
+   independently, nothing in the build process forces them to look alike.
+   These custom properties are what does.
+
+   The shell defines them on :root. Module Federation composes every remote
+   into the same document, so the values cascade into the remotes at runtime
+   without any shared build step. Each remote also ships its own copy so it
+   still renders correctly when served standalone during development.
+
+   Keep the copies identical. If a value changes here, change it everywhere.
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     Brand colours - each family has a role, not just a value
+     --------------------------------------------------------------------- */
+  --color-charcoal: #264653;   /* primary - shells, nav, dark bands       */
+  --color-verdigris: #2a9d8f;  /* interaction - CTAs, links, active state */
+  --color-jasmine: #e9c46a;    /* highlight - progress, completion        */
+  --color-sandy: #f4a261;      /* secondary - warm CTA                    */
+  --color-peach: #e76f51;      /* danger - destructive, urgency           */
+
+  /* Surfaces */
+  --surface-white: #ffffff;
+  --surface-warm: #f8f5f0;
+  --surface-teal: #eef4f3;
+
+  /* Borders */
+  --border-light: #d4dde3;
+  --border-mid: #b4c4cb;
+
+  /* Text */
+  --text-primary: #1a313b;
+  --text-secondary: #4a6572;
+  --text-muted: #7a9aa7;       /* 3.0:1 - decorative text only, never body */
+
+  /* ---------------------------------------------------------------------
+     Text-on-colour pairings, fixed by contrast measurement (WCAG 2.1 AA)
+
+       white   on charcoal   10.08:1  AAA
+       white   on verdigris   3.32:1  AA for UI / large text only
+       white   on peach       3.09:1  AA for UI / large text only
+       charcoal on jasmine    6.03:1  AA
+       charcoal on sandy      4.89:1  AA
+
+     White on jasmine (1.67:1) and white on sandy (2.06:1) both fail.
+     Use these tokens instead of picking a text colour by eye.
+     --------------------------------------------------------------------- */
+  --on-charcoal: var(--surface-white);
+  --on-verdigris: var(--surface-white);
+  --on-peach: var(--surface-white);
+  --on-jasmine: var(--color-charcoal);
+  --on-sandy: var(--color-charcoal);
+
+  /* ---------------------------------------------------------------------
+     Framework accents - used on course cards and tags
+     --------------------------------------------------------------------- */
+  --fw-react: #61dafb;
+  --fw-angular: #dd0031;
+  --fw-vue: #42b883;
+
+  /* ---------------------------------------------------------------------
+     Typography
+     --------------------------------------------------------------------- */
+  --font-display: 'Advent Pro', system-ui, sans-serif;
+  --font-body: 'Advent Pro', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* 1.25 modular scale */
+  --fs-4xl: 3.5rem;    /* 56px   - display heading */
+  --fs-3xl: 2.8rem;    /* 44.8px - section title   */
+  --fs-2xl: 2.25rem;   /* 36px   - h1              */
+  --fs-xl: 1.8rem;     /* 28.8px - h2              */
+  --fs-lg: 1.4375rem;  /* 23px   - h3, card title  */
+  --fs-md: 1.25rem;    /* 20px   - lead paragraph  */
+  --fs-base: 1rem;     /* 16px   - body            */
+  --fs-sm: 0.8rem;     /* 12.8px - labels, caption */
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  --lh-tight: 1.15;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+
+  /* ---------------------------------------------------------------------
+     Spacing - 8px base grid
+     --------------------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---------------------------------------------------------------------
+     Radius
+     --------------------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
+
+  /* ---------------------------------------------------------------------
+     Elevation
+     --------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(26, 49, 59, 0.06);
+  --shadow-md: 0 2px 8px rgba(26, 49, 59, 0.08);
+  --shadow-lg: 0 8px 24px rgba(26, 49, 59, 0.10);
+  --shadow-xl: 0 16px 48px rgba(26, 49, 59, 0.12);
+
+  /* ---------------------------------------------------------------------
+     Layout
+     --------------------------------------------------------------------- */
+  --max-width: 1200px;
+  --nav-height: 64px;
+}
+
+/* Respect users who ask for less motion. Referenced in the accessibility
+   section of the thesis - decorative animation is opt-out by default. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

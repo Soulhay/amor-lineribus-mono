@@ -1,0 +1,203 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--surface-warm);
+}
+
+/* Nav ------------------------------------------------------------------ */
+.app__nav {
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6);
+  background: var(--color-charcoal);
+  color: var(--on-charcoal);
+}
+
+.app__brand {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+.app__links {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.app__links a {
+  color: var(--on-charcoal);
+  text-decoration: none;
+  font-size: var(--fs-base);
+  opacity: 0.75;
+}
+
+.app__links a.active {
+  opacity: 1;
+  color: var(--color-verdigris);
+  font-weight: var(--fw-medium);
+}
+
+/* Main ----------------------------------------------------------------- */
+.app__main {
+  flex: 1;
+  padding: var(--space-12) var(--space-6);
+}
+
+/* Footer --------------------------------------------------------------- */
+.app__footer {
+  padding: var(--space-6);
+  background: var(--color-charcoal);
+  color: var(--on-charcoal);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+/* Landing -------------------------------------------------------------- */
+.landing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.landing__eyebrow {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+  color: var(--color-verdigris);
+}
+
+.landing__title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+.landing__lead {
+  max-width: 46ch;
+  margin: 0 0 var(--space-12);
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  color: var(--text-secondary);
+}
+
+.landing__frameworks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.fw-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--surface-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  font-weight: var(--fw-medium);
+}
+
+.fw-card span {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  background: var(--surface-teal);
+}
+
+.fw-card--react span { color: #0b7ea3; }
+.fw-card--angular span { color: var(--fw-angular); }
+.fw-card--vue span { color: #2e8b62; }
+
+/* Dashboard (Vue remote's screen in the micro-frontend version) ---------- */
+.panel {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6);
+  background: var(--surface-teal);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+}
+
+.panel__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+
+.panel__lead {
+  margin: 0 0 var(--space-6);
+  color: var(--text-secondary);
+}
+
+.panel__button {
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-verdigris);
+  color: var(--on-verdigris);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  cursor: pointer;
+}
+
+/* Lesson (Angular remote's screen in the micro-frontend version) --------- */
+.lesson {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-8);
+  color: var(--text-primary);
+  background: var(--surface-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.lesson__eyebrow {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.lesson__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+.lesson__lead {
+  margin: 0 0 var(--space-6);
+  line-height: var(--lh-normal);
+  color: var(--text-secondary);
+}
+
+.lesson__meta {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-light);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.lesson__xp {
+  color: var(--color-jasmine);
+  font-weight: var(--fw-medium);
+}
