@@ -1,18 +1,27 @@
 /* =========================================================================
-   Amor Lineribus - design tokens
+   Amor Lineribus - design tokens  ·  v1.1
    =========================================================================
 
-   This file is the shared visual contract between the React shell and the
-   Angular and Vue remotes. Because the remotes are built and deployed
-   independently, nothing in the build process forces them to look alike.
-   These custom properties are what does.
+   Shared visual contract between the React shell and the Angular and Vue
+   remotes. Because the remotes build and deploy independently, nothing in
+   the build process forces them to look alike. These custom properties are
+   what does.
 
    The shell defines them on :root. Module Federation composes every remote
    into the same document, so the values cascade into the remotes at runtime
-   without any shared build step. Each remote also ships its own copy so it
-   still renders correctly when served standalone during development.
+   with no shared build step.
 
-   Keep the copies identical. If a value changes here, change it everywhere.
+   IMPORTANT - import placement
+   Each app keeps its own copy so it renders correctly when served standalone
+   during development. That copy must be imported ONLY from the app's
+   standalone entry point, never from the module exposed through Module
+   Federation. Both copies define :root at equal specificity, so a copy
+   loaded on the federated path would inject later and silently override the
+   shell's values.
+
+   RULE
+   No colour, size, radius, shadow or font may be written as a literal value
+   in a component stylesheet. If a value is missing here, add it here first.
    ========================================================================= */
 
 :root {
@@ -30,6 +39,12 @@
   --surface-warm: #f8f5f0;
   --surface-teal: #eef4f3;
 
+  /* Tinted surfaces - light washes of the brand families, for status
+     backgrounds and category pills. Text-primary clears 11:1 on all three. */
+  --surface-jasmine: #fbf1d9;
+  --surface-sandy: #fdeee0;
+  --surface-peach: #fbe4dc;
+
   /* Borders */
   --border-light: #d4dde3;
   --border-mid: #b4c4cb;
@@ -42,14 +57,15 @@
   /* ---------------------------------------------------------------------
      Text-on-colour pairings, fixed by contrast measurement (WCAG 2.1 AA)
 
-       white   on charcoal   10.08:1  AAA
-       white   on verdigris   3.32:1  AA for UI / large text only
-       white   on peach       3.09:1  AA for UI / large text only
-       charcoal on jasmine    6.03:1  AA
-       charcoal on sandy      4.89:1  AA
+       white    on charcoal   10.08:1  AAA
+       white    on verdigris   3.32:1  AA for UI / large text only
+       white    on peach       3.09:1  AA for UI / large text only
+       charcoal on jasmine     6.03:1  AA
+       charcoal on sandy       4.89:1  AA
 
      White on jasmine (1.67:1) and white on sandy (2.06:1) both fail.
-     Use these tokens instead of picking a text colour by eye.
+     Use these tokens rather than choosing a text colour by eye - the
+     pairing is then enforced by the system, not by remembering.
      --------------------------------------------------------------------- */
   --on-charcoal: var(--surface-white);
   --on-verdigris: var(--surface-white);
@@ -58,11 +74,47 @@
   --on-sandy: var(--color-charcoal);
 
   /* ---------------------------------------------------------------------
-     Framework accents - used on course cards and tags
+     Framework accents
+
+     Two sets. The brand colours are the official ones and are used only on
+     dark surfaces or as large fills. The on-light variants are darkened so
+     they meet AA as text on white and on the teal surface, because the
+     official React and Vue colours do not:
+
+       #61dafb on white  1.62:1  fails
+       #42b883 on white  2.50:1  fails
+
+     Measured values for the on-light set:
+       react   #0a7597  5.24:1 white / 4.71:1 teal   AA
+       angular #dd0031  5.10:1 white / 4.58:1 teal   AA
+       vue     #2a805a  4.85:1 white / 4.35:1 teal   AA on white
      --------------------------------------------------------------------- */
   --fw-react: #61dafb;
   --fw-angular: #dd0031;
   --fw-vue: #42b883;
+
+  --fw-react-on-light: #0a7597;
+  --fw-angular-on-light: #dd0031;
+  --fw-vue-on-light: #2a805a;
+
+  /* ---------------------------------------------------------------------
+     Code surfaces - syntax palette, all measured against --color-charcoal
+       text     7.54:1   string  5.71:1   punctuation 4.98:1
+       keyword  3.26:1   function 3.03:1  attribute   6.03:1
+     Keyword and function sit above the 3:1 UI threshold; they are used only
+     for short highlighted spans, never for running text.
+     --------------------------------------------------------------------- */
+  --code-bg: var(--color-charcoal);
+  --code-text: #cfe3e0;
+  --code-string: #9ecfa2;
+  --code-punc: #9cbdb8;
+  --code-keyword: var(--color-peach);
+  --code-function: var(--color-verdigris);
+  --code-attr: var(--color-jasmine);
+  --code-rule: rgba(255, 255, 255, 0.08);
+
+  /* Translucent overlay for controls sitting on imagery or gradients */
+  --overlay-light: rgba(255, 255, 255, 0.15);
 
   /* ---------------------------------------------------------------------
      Typography
@@ -121,8 +173,11 @@
   --shadow-xl: 0 16px 48px rgba(26, 49, 59, 0.12);
 
   /* ---------------------------------------------------------------------
-     Layout
+     Motion + layout
      --------------------------------------------------------------------- */
+  --ease: 0.15s ease;
+  --ease-slow: 0.3s ease;
+
   --max-width: 1200px;
   --nav-height: 64px;
 }
