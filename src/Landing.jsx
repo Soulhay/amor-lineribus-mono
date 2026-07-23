@@ -250,23 +250,3 @@ export default function Landing() {
     </>
   );
 }
-
-import React from 'react';
-
-/**
- * Placeholder. The course overview is built next in the Vue remote; this
- * file gets its React counterpart at the same time so the two
- * implementations stay functionally equivalent.
- */
-export default function Course() {
-  return (
-    <section className="section">
-      <p className="eyebrow">Course overview</p>
-      <h2 className="section__title section__title--left">Coming next</h2>
-      <p className="section__lead">
-        This screen is implemented in the Vue remote in the micro-frontend
-        version and will be mirrored here.
-      </p>
-    </section>
-  );
-}
