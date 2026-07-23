@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
-import Lesson from './Lesson';
+import Lesson from './Course';
 import Course from './Course';
 import Landing from './Landing';
 import './styles/tokens.css';
