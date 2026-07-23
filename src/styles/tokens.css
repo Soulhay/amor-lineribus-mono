@@ -178,7 +178,15 @@
   --ease: 0.15s ease;
   --ease-slow: 0.3s ease;
 
-  --max-width: 1200px;
+/* Content cap. 1200px was sized for a 1440px display and leaves large
+     dead margins on wider screens; 1600px fills a 2560px display without
+     letting line lengths run past comfortable reading width, because the
+     text columns inside are separately capped in ch units. */
+  --max-width: 1600px;
+
+  /* Fluid page gutter — grows with the viewport instead of stepping. */
+  --gutter: clamp(var(--space-4), 4vw, var(--space-16));
+
   --nav-height: 64px;
 }
 
