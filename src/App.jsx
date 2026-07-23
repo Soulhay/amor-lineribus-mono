@@ -7,7 +7,12 @@ import './styles/tokens.css';
 import './styles/app.css';
 import './styles/landing.css';
 import './styles/lesson.css';
+import { useNavigate } from 'react-router-dom';
 
+function CourseRoute() {
+  const navigate = useNavigate();
+  return <Course onResume={() => navigate('/lesson')} />;
+}
 
 export default function App() {
   return (
@@ -32,7 +37,7 @@ export default function App() {
         <main className="app__main">
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/course" element={<Course />} />
+            <Route path="/course" element={<CourseRoute />} />
             <Route path="/lesson" element={<Lesson />} />
           </Routes>
         </main>
