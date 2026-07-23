@@ -402,7 +402,7 @@
   font-weight: var(--fw-medium);
 }
 
-.tag--react   { background: var(--surface-teal);    color: var(--fw-react-on-light); }
+.tag--react { background: var(--surface-teal); color: var(--fw-react-on-light); }
 .tag--angular { background: var(--surface-peach);   color: var(--fw-angular-on-light); }
 .tag--vue     { background: var(--surface-teal);    color: var(--fw-vue-on-light); }
 .tag--neutral { background: var(--surface-jasmine); color: var(--text-primary); }

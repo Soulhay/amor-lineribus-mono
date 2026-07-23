@@ -107,7 +107,7 @@ export default function Course({ onResume }) {
   };
 
   return (
-    <div className="course">
+    <div className="coursepage">
       {/* ── Sidebar ─────────────────────────────────────── */}
       <aside className="csidebar">
         <article className="ccard">
