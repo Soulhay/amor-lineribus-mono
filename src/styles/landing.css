@@ -77,23 +77,27 @@
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
-  padding: var(--space-16) var(--space-6);
+  padding: var(--space-16) var(--gutter);
   background: var(--surface-warm);
 }
 
 .hero__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* Copy column is capped in ch so it stays readable; the card grid takes
+     the remaining space rather than both halves stretching equally. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   gap: var(--space-16);
   align-items: center;
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
+.hero__copy { max-width: 56ch; }
+
 .hero__title {
   margin: 0 0 var(--space-6);
   font-family: var(--font-display);
-  font-size: var(--fs-3xl);
+  font-size: clamp(var(--fs-2xl), 4.5vw, var(--fs-4xl));
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
 }
@@ -190,13 +194,21 @@
 /* ── Topic band ──────────────────────────────────────────── */
 .band {
   position: relative;
-  padding: var(--space-12) var(--space-6);
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: var(--space-12) var(--gutter);
   background: var(--color-charcoal);
   overflow: hidden;
 }
 
 .band__label {
+  position: relative;
+  z-index: 2;
   margin: 0;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--color-charcoal);
   text-align: center;
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
@@ -208,34 +220,24 @@
 .band__pills {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  /* Rows hug the top and bottom edges, leaving the centre clear. */
+  align-content: space-between;
   justify-content: space-around;
   gap: var(--space-4);
-  margin: 0;
-  padding: var(--space-6);
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--gutter);
   list-style: none;
+  pointer-events: none;
 }
-
-.band__pill {
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  color: var(--code-text);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.band__pill[data-offset="0"] { transform: translateY(-18px); }
-.band__pill[data-offset="1"] { transform: translateY(14px); }
-.band__pill[data-offset="2"] { transform: translateY(-6px); }
-.band__pill[data-offset="3"] { transform: translateY(22px); }
 
 /* ── Sections ────────────────────────────────────────────── */
 .section {
-  padding: var(--space-16) var(--space-6);
+  padding: var(--space-16) var(--gutter);
 }
 
 .section--tinted { background: var(--surface-teal); }
