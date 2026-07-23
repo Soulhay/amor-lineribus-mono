@@ -24,7 +24,7 @@
   align-items: center;
   gap: var(--space-8);
   height: var(--nav-height);
-  padding: 0 var(--space-6);
+  padding: 0 var(--gutter);
   background: var(--color-charcoal);
   color: var(--on-charcoal);
 }
@@ -110,7 +110,7 @@
   gap: var(--space-8);
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-16) var(--space-6) var(--space-8);
+  padding: var(--space-16) var(--gutter) var(--space-8);
 }
 
 .app__footer-brand strong {
@@ -161,7 +161,7 @@
 .app__footer-legal {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-6) var(--space-6) var(--space-8);
+  padding: var(--space-6) var(--gutter) var(--space-8);
   border-top: 1px solid var(--code-rule);
   font-size: var(--fs-sm);
   opacity: 0.55;
