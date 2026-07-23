@@ -192,47 +192,77 @@
 }
 
 /* ── Topic band ──────────────────────────────────────────── */
+/* =========================================================================
+   landing.css — replace the entire .band / .band__label / .band__pills /
+   .band__pill block (including the drift offsets) with this.
+
+   Structure is now three stacked children: a pill row, the label, a second
+   pill row. No absolute positioning, so nothing can collide and the height
+   is defined by the content rather than a magic min-height.
+   ========================================================================= */
+
 .band {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 220px;
-  padding: var(--space-12) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--gutter);
   background: var(--color-charcoal);
   overflow: hidden;
 }
 
-.band__label {
-  position: relative;
-  z-index: 2;
+.band__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: var(--max-width);
   margin: 0;
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-pill);
-  background: var(--color-charcoal);
-  text-align: center;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.band__label {
+  margin: 0;
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
+  text-align: center;
 }
 
-.band__pills {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  /* Rows hug the top and bottom edges, leaving the centre clear. */
-  align-content: space-between;
-  justify-content: space-around;
-  gap: var(--space-4);
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-6) var(--gutter);
-  list-style: none;
-  pointer-events: none;
+.band__pill {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--code-rule);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--code-text);
+  opacity: 0.85;
+  animation: drift var(--drift-time) ease-in-out infinite;
+}
+
+/* Four drift profiles so the row never settles into a visible rhythm.
+   Negative delays start each pill mid-cycle rather than all at zero. */
+.band__pill[data-offset="0"] {
+  --drift-from: -7px; --drift-to: 5px;  --drift-time: 6.5s;
+  animation-delay: 0s;
+}
+.band__pill[data-offset="1"] {
+  --drift-from: 6px;  --drift-to: -4px; --drift-time: 7.8s;
+  animation-delay: -1.4s;
+}
+.band__pill[data-offset="2"] {
+  --drift-from: -3px; --drift-to: 7px;  --drift-time: 5.9s;
+  animation-delay: -2.7s;
+}
+.band__pill[data-offset="3"] {
+  --drift-from: 8px;  --drift-to: -2px; --drift-time: 8.4s;
+  animation-delay: -0.8s;
 }
 
 /* ── Sections ────────────────────────────────────────────── */
@@ -408,74 +438,79 @@
 
 .course__rating { color: var(--color-jasmine); font-weight: var(--fw-medium); }
 
-/* ── CTA ─────────────────────────────────────────────────── */
+/* =========================================================================
+   landing.css — replace the .cta block.
+
+   The panel was capped at 720px, which reads as a small card adrift in
+   white space on a wide display. It now scales with the content width and
+   lays out as two columns on desktop so the copy and the form share the
+   space instead of stacking in a narrow column.
+   ========================================================================= */
+
 .cta {
-  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: var(--space-12);
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-16) var(--space-8);
-  text-align: center;
+  padding: var(--space-16) clamp(var(--space-8), 5vw, var(--space-16));
   border-radius: var(--radius-2xl);
-  background: linear-gradient(140deg, var(--color-charcoal), #2f5a68);
+  background:
+    radial-gradient(circle at 88% 15%, rgba(42, 157, 143, 0.35), transparent 55%),
+    linear-gradient(140deg, var(--color-charcoal), #2f5a68);
   color: var(--on-charcoal);
+  text-align: left;
 }
 
 .cta__title {
   margin: 0 0 var(--space-3);
   font-family: var(--font-display);
-  font-size: var(--fs-2xl);
+  font-size: clamp(var(--fs-xl), 3vw, var(--fs-3xl));
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
 }
 
 .cta__lead {
-  margin: 0 0 var(--space-8);
-  font-size: var(--fs-base);
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
   opacity: 0.85;
 }
 
 .cta__form {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-3);
 }
 
 .cta__input {
-  flex: 1 1 260px;
-  max-width: 320px;
-  padding: var(--space-3) var(--space-4);
+  flex: 1 1 240px;
+  padding: var(--space-4);
   border: 1px solid var(--border-mid);
   border-radius: var(--radius-md);
   background: var(--surface-white);
   font-family: var(--font-body);
   font-size: var(--fs-base);
   color: var(--text-primary);
-
-  &::placeholder { color: var(--text-muted); }
 }
 
-/* ── Mobile ──────────────────────────────────────────────── */
+.cta__input::placeholder { color: var(--text-muted); }
+
+.cta__input:focus-visible {
+  outline: 2px solid var(--color-jasmine);
+  outline-offset: 2px;
+}
+
 @media (max-width: 900px) {
-  .hero { padding: var(--space-12) var(--space-4); }
-
-  .hero__inner {
+  .cta {
     grid-template-columns: 1fr;
-    gap: var(--space-12);
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
   }
 
-  .hero__title { font-size: var(--fs-2xl); }
-
-  .stats { gap: var(--space-8); }
-
-  .section { padding: var(--space-12) var(--space-4); }
-
-  .section__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-  }
-
-  .band__pills { display: none; }
-
-  .cta { padding: var(--space-12) var(--space-6); }
+  .cta__lead { max-width: none; }
+  .cta__form { justify-content: center; }
 }
