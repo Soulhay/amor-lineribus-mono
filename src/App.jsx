@@ -3,7 +3,7 @@ import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Lesson from './Course';
 import Course from './Course';
 import Landing from './Landing';
-import Lesson from './Lesson'
+import Lesson from './Lesson';
 import './styles/tokens.css';
 import './styles/app.css';
 import './styles/landing.css';
