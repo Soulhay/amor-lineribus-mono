@@ -3,10 +3,12 @@ import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Course from './Course';
 import Landing from './Landing';
 import Lesson from './Lesson';
+import Dashboard from './Dashboard';
 import './styles/tokens.css';
 import './styles/app.css';
 import './styles/landing.css';
 import './styles/lesson.css';
+import './styles/dashboard.css';
 import { useNavigate } from 'react-router-dom';
 
 function CourseRoute() {
@@ -27,6 +29,7 @@ export default function App() {
             <NavLink to="/" end>Home</NavLink>
             <NavLink to="/course">Courses</NavLink>
             <NavLink to="/lesson">Lesson</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </nav>
 
           <NavLink to="/course" className="btn btn--primary btn--sm">
@@ -39,6 +42,7 @@ export default function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/course" element={<CourseRoute />} />
             <Route path="/lesson" element={<Lesson />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
 
