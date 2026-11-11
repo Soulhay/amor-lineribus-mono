@@ -316,9 +316,6 @@ export default function Course({ onResume }) {
           </section>
         )}
 
-        <p className="origin">
-          Monolithic reference &middot; single bundle, no federation
-        </p>
       </main>
     </div>
   );
